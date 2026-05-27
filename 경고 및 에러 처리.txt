@@ -1,0 +1,24 @@
+■■■ 경고 및 에러 처리 (트러블슈팅) ■■■
+
+
+1. Project '프로젝트명' has no explicit encoding set 과 같은 경고 발생 시 
+   → 인코딩이 명확히 설정되지 않아 발생하는 문제 
+   → 해결 
+        1. 프로젝트명 우클릭 → Properties
+	2. Desource 항목 클릭
+	3. Text file encoding 섹션 → Other : 선택 후 UTF-8 선택
+
+2. JSP를 사용할 때 JSTL 의 <c:forEach> 구문을 사용할 때 다음과 같은 경고 발생 시
+   A probles was encountered using TagExtraInfe class org.apache.taglibs.standard.tei.ForEachTEI for 'c:forEach'
+
+   → 해결 
+	1. Window > Preferences > Web >Jsp files > Validation
+	     custom actions : "Other problems with TagExtrainfg class : " - ignore
+
+
+3. 마이바티스 XML 에서 다음과 같은 에러 발생 시 
+   downloading externarl resources is disabled.
+
+  → 해결 
+	1. Window > Preferences > XML(Wild Web Develops)
+	2. Download external resources like referenced DTD, XSD 체크 설정

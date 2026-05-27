@@ -1,0 +1,121 @@
+■■■ Spring Boot 개념 정리 ■■■
+
+○ 개요 
+
+	-『스프링 레거시』가 스프링 프레임워크를 직접 조립해서 사용하는 방식이라 함ㄴ다면,
+	 『스프링 부트』는 스프링을 빠르게 실행 가능한 어플리케이션으로 만들기 위해
+	 기본적인 조립을 자동화한 방식이다
+	- 둘 다 핵심은 스프링 프레임워크 이다.
+	  스프링 부트가 스프링을 대체하는 개념이 아니라
+	  스프링을 좀 더 쉽게 사용해주는 도구라고 이해하는 것이 바람직하다.
+
+○ 비교를 위한 스프링 레거시 정리 
+	
+	- 일반적으로 스프링 레거시라 함은 스프링 부트 이전 방식의 스프링 MVC프로젝트를 의미한다.
+	- 대표적으로 다음과 같은 특성을 갖는다.
+	   、 web.xml 설정 사용.
+	   、 applicationContext.xml(root-context.xml), servlet-context.xml 같은 XML 설정 사용.
+	   、 외부 WAS(Tomcat)에 WAR 파일을 배포.
+	   、 의존성 버전을 우리가 직접 관리
+	   、 DB, MVC, 트랜잭션, View Resolver 등을 직접 설정
+	   、 프로젝트 구조가 상대적으로 무겁고 설정 파일이 많음.
+	- 스프링 MVC 프로젝트 흐름 
+	   、 코드 작성 → WAR 파일 빌드 → 외부 Tomcat에 배포 → Tomcat이 web.xml 읽음 → DispatcherServlet 초기화
+	       → Spring Context 로딩 → 어플리케이션 실행
+	     (즉, 어플리케이션 자체가 독립적으로 실행된다기 보다는 WAS 안에 들어가서 실행되는 구조)
+
+
+○ 비교를 위한 스프링 부트 정리 
+	- 스프링 부트는 스프링 기반 어플리케이션을 빠르게 맏늘 수 있도록 도와주는 프레임워크를 의미한다.
+	- 다음과 같은 핵심 목포를 갖는다.
+	    、 특정한 설정 최소화
+	    、 의존적 버전 자동 관리
+	    、 내장 톰캣 제공
+	    、 독립적인 실행이 가능한 JAR 생성
+	    、 운영에 필요한 기능 제공
+	    、 빠른 개발 환경 구성
+	- 스프링 부트 프로젝트 흐름
+	    、 코드 작성 → JAR 파일 빌드 → java -jar app.jar 실행 → 내장 Tomcat 실행 → Spring Boot 어플리케이션 시작
+		(즉, 스프링 부트는 WAS 에 배포하는 어플리케이션이 아니라
+		 보통은 저기 안에 WAS를 포함한 특정 실행 어플리케이션으로 동작하는 구조)
+
+
+○ 가장 큰 차이 → 설정 방식
+	- 스프링 레거시는 설정을 개발자(우리)가 많이 직접 작성한다. 
+	- 스프링 부트에서는 대부분 자동 설정된다.
+	 ex) @SpringBootApplication 하나 안에는 다음 기능들이 포함되어 있다.
+	    → @SpringBootConfiguration
+	    → @SpringBootConfiguration
+	    → @ComponentScan
+	  · 컴포넌트 스캔
+	  · MVC 설정
+	  · 내장 톰캣 설정
+	  · 데이터소스 설정
+	  · 트랜잭션 설정
+	  · JPA 설정
+	  · 메세지 컨버터 설정
+	  · 정적 리소스 정보 설정
+
+○ 의존성 관리 차이
+	- 스프링 레거시에서는 Maven 이나 Gradle 에서 라이브러리 버전을 직접 맞춰야 하는 경우가 많았다.
+          이로 인해 각 라이브러리의 버전이 서로 호환되는지 개발자가 직접 확인해야 한다.
+	  이에 반해 스프링 부트는 『starter』 개념을 제공한다.
+	  ex) 웹 개발 위한 gradle 설정으로
+		『implementation org.springframework.boot:spring-boot-starter-web』 하나만 추가하면
+		  내부적으로 다음 기능들이 함께 들어온다.
+	  · Spring MVC
+	  · 내장 Tomcat
+	  · Jacson
+	  · Validation 관련 기능 구성
+	  · 로깅 관련 기분 구성
+
+○ 배포 방식 차이
+	- 스프링 레거시는 보통 WAR 파일을 만들어 외부 Tomcat, WebLogic, Jeus 같은 WAS에  배포하는데, 
+	  스프링 부트는 보통 JAR 파일을 만들며, 내장 Tomcat이 있기 때문에 별도로 Tomcat을 설치하지 않아도 된다.
+	  물론 스프링 부트도 WAR로 패키징해서 외부 WAR에 배포할 수 있지만
+	  기본 철학은 독립 실행 가능한 어플리케이션이다.
+
+○ 프로젝트 구조 차이
+	- 스프링 레거시
+	src/main/java
+	src/main/resources
+	src/main/webapp
+		WEB-INF
+		     web.xml
+		     views
+		          home.jsp
+
+	- 스프링 부트
+	src/main/java
+		com.doit.app
+			BeanApplication.java
+			controller
+			service
+			repository
+	src/main/resources
+		application.yml(또는 properties)
+		static
+		templates
+
+
+○ 설정 파일 차이
+	- 스프링 레거시는 XML 설정이 필요하다.
+	 · web.xml
+	 · root-context.xml
+	 · servlet-context.xml
+	 · mybatis-context.xml
+	
+	- 스프링 부트는 보통 application.properties 또는 application.yml 을 사용한다
+	 → 분리도 쉽게 가능하다
+
+
+○ 자동 설정. Auto Configuration
+  ※ 스프링 부트의 핵심 중 하나가 바로 자동 설정이다.
+
+=> 스프링 부트가 모든 것에 대신해 주는 것은 아니다. 
+   스프링 부트는 여러 설정들을 자동으로 해주지만 결국 내부는 스프링이다
+   때문에, 스프링 레거시를 기반으로 이해한 내용들을 중요하게 파악하고 활용할 수 있어야 한다. 
+  IoC/DI, Bean, ApplicationContext, AOP, Transaction, MVC, DispatcherServlet, Filter
+   , Interceptor, Repository, Service, Controller 등 
+	
+	

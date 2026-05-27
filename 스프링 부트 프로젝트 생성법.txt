@@ -1,0 +1,53 @@
+■■■ 스프링 부트 프로젝트 생성 ■■■
+
+※ JSP, Oracle, Mybatis, Gradle-Groovy
+
+- 메뉴 > File > New > Spring Starter Project 
+ → New Spring Starter Project 대화상자 호출
+
+- New Spring Starter Project
+     ·Service URL 
+ 	→ https://start.spring.io → 기본값 구성
+     ·Name 
+	→ sb01_JspOracleMybatis
+     ·Type
+	→ 기본값 구성 
+- Packaging 
+	→ ※ jsp 쓸 때는 war // 타임리프를 쓸 때는 jar 
+- Java Version
+	→ 21
+- Language
+	→ Java
+- Group
+	→ com.doit
+- Artifact
+	→ Name쓰면 자동으로 채워짐
+- Version
+	→ SNAPSHOT(개발 중이다라는 뜻)기본값 구성 // 배포는 REALEASE?? 확인해봐야함 
+- Description
+	→ 설명 ex) Setting Project for Spring Boot
+- Package 
+	→ com.doit.app
+// 여기까지 설정을 마치면
+//대화창 우측 하단의 next 클릭
+→ New Spring Starter Project Dependencis 대화창호출
+
+- Spring Boot Version  // spring boot 버전이랑 sts 버전 잘 구분할 것!!
+	→ 3.5.14 (3.버전 안에서 스냅샷 없는걸로 !!)
+	※ Spring Boot Version 3.5.xx → Servlet 6.x 버전, Spring Version 6.0 버전이다
+- Avaliable(필요한 라이브러리 선택 )
+	→ Developer Tools 노드확장 : Sprint Boot DevTools, Lombok  선택
+	→ SQL 노드확장 : JDBC API, MyBatis Framework, Oracle Driver 선택
+	→ Web : Spring Web 선택 
+
+- finish 
+
+
+
+
+
+
+
+
+
+

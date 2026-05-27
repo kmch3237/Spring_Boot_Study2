@@ -1,0 +1,66 @@
+■■■  스프링 부트 실습 환경 설정 ■■■  
+
+
+
+○ STS 다운로드 및 설치 (우리가 설치한건 4.32.2)
+   → ver.4 또는 ver.5(실무 대부분 4.xx 사용)
+
+   - 다운로드 URL
+     http://spring.io/tools
+
+
+   - 다운로드 URL(모든 버전)
+     http://github.com/spring-projects/spring-tools/wiki/Previous-Versions
+
+○ STS 4 : 수업 및 실습용
+
+   - WINDOWS X86_64 다운로드
+    · win32.win32.x86_64.zip
+    ·다운로드 후 파일 압축 해제. → 반디집 활용 
+  
+   - 주의사항
+    ·Spring Boot Version 3.5.1x는 sts4 사용
+
+○ STS 5 : 참고
+   
+   - WINDOWS X86_64 다운로드
+    ·파일 : spring-tools-for-eclipse-5.1.1.RELEASE-e4.39.0-win32.win32.x86_64.zip
+  
+   - 주의사항
+    · ilodfdf? 등을 수동으로 설치해야 한다.
+    · Spring Boot Version 4.0.x 는 문제 없지만
+       Spring Boot Version 3.5.x 는 에러 발생 
+       Spring Boot Version 3.5.x 는 STS 4 사용
+
+
+
+
+○ 스프링 부트 JSP Editor 설치 
+   - Spring Boot는 기본적으로 JSP 를 지원히자 않으며(불친절)
+	HTML, CSS, JS, JSP 등을 작성하기 위해서는 JSP Editor를 설치한다.
+
+   - 메뉴 
+	·help → MarketPlace 클릭 → find 대화창에 Java and Web Developer 입력
+       
+ 
+   - 검색 결과 리스트 중
+	Eclipse Enterprise Java and Web Developer Tools 3.39 설치 
+	·해당 항목의 install 버튼 클릭 
+	· 기본적으로 선택된 항목 유지 상태로 Confirm 버튼 클릭 
+	· i accept the terms of the license agreements 선택 후 Finish 
+	   ※ 설치되는데 시간이 좀 걸린다. (우측 하단 실행 상태창 확인)
+
+	· Trust Artifacts 대화창이 뜨면 『Select All』 버튼 클릭으로 모두 선택하고 Trust Selected 버튼 클릭 
+	· Restart Now 클릭 → STS 다시 구동 
+
+
+
+○ 인코딩 설정 및 확인
+   → 스프링 부트는 보통 기본으로 설정되어 있는 경우가 대부분이지만,
+      이전에 설치된 Eclipse 나 STS 의 유무나 버전 설정에 따라 아닌 경우도 있기 때문에 확인할 수 있도록 한다.
+      - Text File Encoding 설정 및 확인 
+	메뉴 > Window > Preferences > Genearl > WorkSpace > Other(UTF-8)
+
+   → CSS / JSP / HTML 인코딩 설정 및 확인
+        메뉴 > Window > Preferences > Web > CSS, HTML,JSP Files > UTF-8       
+

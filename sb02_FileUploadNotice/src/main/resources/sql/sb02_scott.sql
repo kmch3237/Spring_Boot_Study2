@@ -1,0 +1,54 @@
+SELECT USER
+FROM DUAL;
+-- SCOTT
+
+
+--테이블 생성
+
+CREATE TABLE NOTICE
+(NUM        NUMBER PRIMARY KEY  -- 게시물 번호 → 기본키 설정 
+,NOTICE     NUMBER(1) DEFAULT 0 -- 공지사항 등록 여부
+,NAME       VARCHAR2(30) NOT NULL-- 게시물 작성자
+,SUBJECT    VARCHAR2(255) NOT NULL -- 게시물 제목
+,CONTENT    CLOB NOT NULL   -- 게시물 내용 → 데이터 타입 CHECK!! CLOB,BLOB(ORACLE내부 엄청큰데이터타입)
+,HITCOUNT   NUMBER DEFAULT 0 -- 게시물 조회수 
+,REGDATE    DATE DEFAULT SYSDATE -- 게시물 등록일
+
+);
+-- Table NOTICE이(가) 생성되었습니다.
+
+
+--테이블 생성
+CREATE TABLE NOTICEFILE
+( FILENUM           NUMBER NOT NULL         --파일번호 PK
+, NUM               NUMBER NOT NULL         --게시물 번호 FK
+, SAVEFILENAME      VARCHAR2(500) NOT NULL  -- 저장 파일명
+, ORIGINALFILENAME  VARCHAR2(500) NOT NULL  -- 원본 파일명
+, FILESIZE          NUMBER                  -- 파일 크기 
+, CONSTRAINT PK_NOTICEFILE_FILENUM PRIMARY KEY(FILENUM)
+, CONSTRAINT FK_NOTICEFILE_NUM FOREIGN KEY(NUM)
+                    REFERENCES NOTICE(NUM)
+);
+-- Table NOTICEFILE이(가) 생성되었습니다.
+
+-- 시퀀스 생성
+CREATE SEQUENCE NOTICE_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+-- Sequence NOTICE_SEQ이(가) 생성되었습니다.
+
+
+-- ○ 시퀀스 생성
+CREATE SEQUENCE NOTICEFILE_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+-- Sequence NOTICEFILE_SEQ이(가) 생성되었습니다.
+
+
+
