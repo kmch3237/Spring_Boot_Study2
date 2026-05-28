@@ -38,3 +38,22 @@ finish
 
 - /build.gradle
 	→ jsp환경 구성에 필요한 라이브러리 추가 
+	
+- src/main/resources/application.yml
+	→ 내장 톰캣 서버의 포트 번호나
+	   Spring MVC 관련 설정 및 마이바티스 설정 구성. 
+	   
+	   
+- src/main/java/com/doit/app/model/Notice.java	   
+	 → 모델 객체 구성. 
+	 
+- src/main/java/com/doit/app/service/NotisService.java
+     → 서비스 계층 구성
+     → 인터페이스.
+     
+- src/main/java/com/doit/app/mapper/NoticeMapper.java    
+	→ 매퍼 인터페이스 구성 
+	
+- src/main/resources/mybatis/mapper/NoticeMapper.xml	
+	→ MyBatis Mapper XML 구성 
+	

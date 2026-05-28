@@ -1,1 +1,18 @@
-spring.application.name=sb02_FileUploadNotice
+server:
+  port: 3306
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+      url: jdbc:oracle:thin:@//127.0.0.1:1521/xe
+      hikari:
+         username: scott
+         password: tiger
+
+mybatis:
+  mapper-locations: classpath*:/mybatis/mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

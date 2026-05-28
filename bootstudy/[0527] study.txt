@@ -1,0 +1,78 @@
+[0527] study
+
+memberMapper.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doit.app.mapper.MemberMapper">
+<select id="listMember" resultType="com.doit.app.domain.Member">
+</select>
+
+<insert id="insertMember" parameterType="com.doit.app.domain.Member">
+</insert>
+</mapper>
+
+resultType/ parameterType 구분 check!! 논리적으로 이해  
+
+
+=========================
+
+jsp 형식 설정
+
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix = "c" uri="jakarta.tags.core"%>
+<%@ taglib prefix = "fmt" uri="jakarta.tags.fmt"%>
+
+
+
+
+// ai 구성 ㄴㄴㄴ 포트폴리오 개발팀장
+★ 내가 짠 코드 검수만!!!     제발제발 ai ㄴㄴ   
+====================
+
+css경로설정
+<link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath }/dist/css/main.css">
+
+
+=====================
+
+http://localhost:3306/member/list인데 http://localhost:3306/list 라고 씀 
+
+=====================
+@GetMapping("/list") 
+	public String list(Model model) // 화면에 뿌려야하니깐 viewresolver model 받음
+	{
+
+getparam name, tel을 햇음 할 필요가 없는데
+
+=====================
+list.jsp에서 등록 버튼 onclick 연결을 안함 
+======================
+@RequestMapping("/member/*") 
+public class MemberController { 에서 /*을 빼야하는데 안뺐음 
+
+===========================
+ex) public String ~~~~(Member dto, HttpServletRequest req)
+HttpServletRequest를 받는 이유 (필요할 때)
+Spring이 자동으로 채워주는 객체인데, HTTP 요청 정보가 필요할 때 받습니다:
+1. 클라이언트 IP 알아낼 때
+javaString ip = req.getRemoteAddr();
+회원 가입한 사람의 IP 로깅 같은 데 사용.
+2. 세션 가져올 때
+javaHttpSession session = req.getSession();
+session.setAttribute("user", member);
+로그인 처리할 때 자주 씁니다.
+3. 헤더 정보 읽을 때
+javaString userAgent = req.getHeader("User-Agent");
+String referer = req.getHeader("Referer");
+4. 파라미터 직접 꺼낼 때 (잘 안 씀)
+javaString name = req.getParameter("name");
+근데 이건 @RequestParam이나 DTO 바인딩이 훨씬 깔끔해서 거의 안 써요.
+5. ContextPath 가져올 때
+javaString path = req.getContextPath();   // "/sb01" 같은 값
+===========================
+
+build.gradle  jsp~ tomcat 작성
+application.properties 에서 application.yml으로 야물파일은 무조건 스페이스로 공백!!  datasource는 mvc하고 형제 
