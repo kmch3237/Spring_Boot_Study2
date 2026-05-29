@@ -1,0 +1,10 @@
+/*
+ 
+ */
+
+
+package com.doit.app.service;
+
+public class MemberServiceImpl {
+
+}

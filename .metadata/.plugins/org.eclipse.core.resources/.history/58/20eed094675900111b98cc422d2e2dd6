@@ -1,0 +1,5 @@
+package com.doit.app.controller;
+
+public class MemberController {
+
+}

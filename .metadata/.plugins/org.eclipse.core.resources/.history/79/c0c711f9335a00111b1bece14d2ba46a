@@ -1,0 +1,37 @@
+/* =========================
+ 	NoticeService.java
+ 	- Service 계층 구성
+ 	- 인터페이스 구성
+=========================== */
+
+
+
+package com.doit.app.service;
+
+import java.util.List;
+
+import com.doit.app.model.Notice;
+
+public interface NotisService {
+	
+	public void insertNotice(Notice dto) throws Exception;
+	public void updateNotice(Notice dto) throws Exception;
+	public void deleteNotice(long num) throws Exception;
+	
+	public int dataCount() throws Exception;
+	public void listNoticeTop(Notice dto) throws Exception;
+	public List<Notice> listNotice() throws Exception;
+	
+	public void updateHitCount(long num) throws Exception;
+	public void findById(Notice dto) throws Exception;
+	public void findByPrev(Notice dto) throws Exception;
+	public void findBynext(Notice dto) throws Exception;
+	
+	public List<Notice> listNoticeFile(long num) throws Exception;
+	public String findByFileId(Notice dto) throws Exception;
+	public void deleteNoticeFile() throws Exception;
+	
+	
+	
+
+}

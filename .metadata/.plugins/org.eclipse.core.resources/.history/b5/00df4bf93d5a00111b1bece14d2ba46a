@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doit.app.mapper.NoticeMapper">
+
+<!--등록  -->
+	<insert id="insertNotice"
+		parameterType="com.doit.app.model.Notice">
+		 INSERT INTO NOTICE (NUM, NOTICE, NAME, SUBJECT, CONTENT
+		, HITCOUNT, REG_DATE) VALUES (NOTICE_SEQ.NEXTVAL, #{notice}, #{name},
+		#{subject}, #{content}, 0, SYSDATE) 
+	</insert>
+
+<!--수정  -->
+	<update id="updateNotice"
+		parameterType="com.doit.app.model.Board"> 
+		UPDATE NOTICE
+		SET NOTICE = #{notice}, NAME = #{name}, SUBJECT = #{subject}, CONTENT = #{content}
+		WHERE NUM = #{num} 
+	</update>
+
+<!--삭제  -->
+	<delete id="deleteBoard" parameterType="long"> 
+	    DELETE FROM NOTICE 
+	    WHERE NUM = #{num}
+	</delete>
+	
+	
+<!--List<Notice> listNotice(Map<String, Object> map) 페이징 + 검색
+		schType, kwd, offset, size offset = (currentPage - 1) * size ← Service 단에서 계산해서 전달 -->
+	<select id="listNotice" parameterType="map"
+		resultType="com.doit.app.model.Notice">
+		SELECT NUM, NOTICE, NAME, SUBJECT, CONTENT, HITCOUNT, TO_CHAR(REG_DATE,'YYYY-MM-DD') AS "regDate"
+		FROM NOTICE
+		<where>
+			<if test="kwd != null and kwd != ''">
+				<include refid="where-list" />
+			</if>
+		</where>
+		ORDER BY NUM DESC OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+
+
+<!--updateHitCount(long num)  -->	
+	<update id="updateHitCount" parameterType="long"> 
+	    UPDATE NOTICE 
+	    SET HITCOUNT = HITCOUNT + 1 
+	    WHERE NUM = #{num} 
+	</update>	
+	
+	
+
+<!-- 게시물 개수  -->
+	<select id="dataCount" parameterType="map" resultType="int">
+		SELECT NVL(COUNT(NUM), 0) 
+		FROM NOTICE
+		<where>
+			<if test="kwd != null and kwd != ''">
+				<include refid="where-list" />
+			</if>
+		</where>
+	</select>
+
+
+
+<!--Notice findById(long num)  -->
+<!--Notice findByPrev(Map<String, Object> map)  -->
+<!--public Notice findBynext(Map<String, Object> map)  -->
+<!-- List<Notice> listNoticeFile(long num)  -->
+<!-- Notice findByFileId(long fileNum)  -->
+<!--void deleteNoticeFile(Map<String, Object> map)  -->
+
+
+
+
+</mapper>
+

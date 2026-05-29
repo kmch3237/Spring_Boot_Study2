@@ -1,0 +1,5 @@
+package com.doit.app.service;
+
+public class MemberService {
+
+}

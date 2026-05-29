@@ -1,0 +1,38 @@
+/* =========================
+ 	NoticeService.java
+ 	- Service 계층 구성
+ 	- 인터페이스 구성
+=========================== */
+
+
+
+package com.doit.app.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.doit.app.model.Notice;
+
+public interface NoticeService {
+	
+	public void insertNotice(Notice dto) throws Exception;
+	public void updateNotice(Notice dto) throws Exception;
+	public void deleteNotice(long num) throws Exception;
+	
+	public int dataCount(Map<String, Object> map) throws Exception; // 페이징처리할떄!!, 검색타입필요!! 
+	public List<Notice> listNoticeTop() throws Exception;
+	public List<Notice> listNotice(Map<String, Object> map) throws Exception;
+	
+	public void updateHitCount(long num) throws Exception;
+	public Notice findById(long num) throws Exception;
+	public Notice findByPrev(Map<String, Object> map) throws Exception;
+	public Notice findBynext(Map<String, Object> map) throws Exception;
+	
+	public List<Notice> listNoticeFile(long num) throws Exception;
+	public Notice findByFileId(long fileNum) throws Exception;
+	public void deleteNoticeFile(Map<String, Object> map) throws Exception;
+	
+	
+	
+
+}

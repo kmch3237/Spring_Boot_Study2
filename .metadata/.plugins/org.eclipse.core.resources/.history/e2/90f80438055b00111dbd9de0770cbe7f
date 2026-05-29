@@ -1,0 +1,59 @@
+Service URL    : https://start.spring.io
+Name           : sb02_FileUploadNotice
+Location       : C:\StudySpringBoot\sb02_FileUploadNotice
+Type           : Gradle - Groovy
+Packaging      : War
+Java Version   : 21
+Language       : Java
+Group          : com.doit
+Artifact       : sb02_FileUploadNotice
+Version        : 0.0.1-SNAPSHOT
+Description    : Setting Project for Spring Boot
+Package        : com.doit.app
+
+next 
+
+두번째 프로젝트 생성 부터는 
+Spring Boot Version 3.5.14
+☑ JDBC API
+☑ Lombok
+☑ MyBatis Framework
+☑ Oracle Driver
+☑ Spring Boot DevTools
+☑ Spring Web
+체크박스가 생겨서 체크만 하면 됨
+
+finish
+
+프로젝트명 마우스 우클릭 Properties > facets 버전확인 6.1  // 21 
+
+○ 프로젝트 성격(구현 기능)
+   - 첨부파일 업로드 가능한 공지사항 게시판
+ 
+○ 물리적 파일 구성
+
+- src/main/resources/sql/sb02_scott.sql
+	→ 테이블 구성
+	→ 시퀀스 생성
+
+- /build.gradle
+	→ jsp환경 구성에 필요한 라이브러리 추가 
+	
+- src/main/resources/application.yml
+	→ 내장 톰캣 서버의 포트 번호나
+	   Spring MVC 관련 설정 및 마이바티스 설정 구성. 
+	   
+	   
+- src/main/java/com/doit/app/model/Notice.java	   
+	 → 모델 객체 구성. 
+	 
+- src/main/java/com/doit/app/service/NotisService.java
+     → 서비스 계층 구성
+     → 인터페이스.
+     
+- src/main/java/com/doit/app/mapper/NoticeMapper.java    
+	→ 매퍼 인터페이스 구성 
+	
+- src/main/resources/mybatis/mapper/NoticeMapper.xml	
+	→ MyBatis Mapper XML 구성 
+	

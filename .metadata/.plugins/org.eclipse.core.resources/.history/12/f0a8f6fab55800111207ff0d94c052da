@@ -1,0 +1,16 @@
+■■■ 스프링 부트 기본 실습 ■■■
+
+
+- src/main/resources/sql/sb01_scott.sql
+→ db관련 준비 
+
+
+- src/main/java/com/doit/app/domain/Member.java
+→ dto 생성 
+
+- src/main/java/com/doit/app/service/MemberService.java
+→ Service 구성. → Interface 구성. 
+
+
+- src/main/java/com/doit/app/mapper/MemberMapper.java
+→ 매퍼 인터페이스 구성.

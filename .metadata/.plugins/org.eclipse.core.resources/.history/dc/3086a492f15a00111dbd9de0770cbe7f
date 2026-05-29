@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doit.app.mapper.NoticeMapper">
+
+	<!--MyBatis Mapper XML
+		NoticeMapper 인터페이스의 메소드와 SQL 을 연결하여
+		공지사항 게시판의 게시물 등록, 목록 조회, 검색, 상세 조회
+		이전/다음글, 수정, 삭제, 첨부파일 처리 등을 담당할 수 있도록 구성  -->
+		
+	<!--요청 및 처리 흐름 
+		Controller → NoticeService → NoticeMapper 인터페이스 → NoticeMapper.xml → Oracle DB  -->
+		
+		
+
+
+<!-- 등록 
+			id =NoticeMapper인터페이스 메소드이름-->
+    <insert id="insertNotice" parameterType="com.doit.app.model.Notice">
+     	
+    	<!--INSERT액션 처리 전에 (order=BEFORE)게시글 번호를 먼저 생성 → 시퀀스 활용
+    		keyProperty="num" Notice객체의 num 필드에 넣기  -->
+    	<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+    		SELECT NOTICE_SEQ.NEXTVAL
+    		FROM DUAL   	
+    	</selectKey>
+    	
+    	
+    	<!-- ${} : MyBatis 의 파라미터 바인딩  -->
+    	<!--  #{subject}로 예를 들면,
+    		  JAVA 객체의 getSubject() 값을 가져와서 PreparedStatement SQL의 ? 자리에 넣는 과정 수행--> 
+        INSERT INTO NOTICE (NUM, NAME, SUBJECT, CONTENT, NOTICE, HITCOUNT, REGDATE)
+        VALUES (#{num}, #{notice}, #{name}, #{subject}, #{content}, 0, SYSDATE)
+    </insert>
+	<!-- NOTICE_SEQ.NEXTVAL 획득 → 결과값 dto.num 저장 → INSERT 실행 -->
+
+
+<!-- 수정 -->
+    <update id="updateNotice" parameterType="com.doit.app.model.Notice">
+        UPDATE NOTICE
+        SET NOTICE = #{notice}, NAME = #{name}, SUBJECT = #{subject}, CONTENT = #{content}
+        WHERE NUM = #{num}
+    </update>
+
+<!-- 삭제 -->
+    <delete id="deleteNotice" parameterType="long">
+        DELETE FROM NOTICE
+        WHERE NUM = #{num}
+    </delete>
+
+<!-- 게시물 리스트 (페이징 + 검색) -->
+    <select id="listNotice" parameterType="map"
+            resultType="com.doit.app.model.Notice">
+        SELECT NUM, NOTICE, NAME, SUBJECT, CONTENT, HITCOUNT,
+               TO_CHAR(REGDATE,'YYYY-MM-DD') AS "regDate"
+        FROM NOTICE
+        <where>
+            <if test="kwd != null and kwd != ''">
+                <include refid="where-list" />
+            </if>
+        </where>
+        ORDER BY NUM DESC OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+    </select>
+
+<!-- 게시물 개수 -->
+    <select id="dataCount" parameterType="map" resultType="int">
+        SELECT NVL(COUNT(NUM), 0)
+        FROM NOTICE
+        <where>
+            <if test="kwd != null and kwd != ''">
+                <include refid="where-list" />
+            </if>
+        </where>
+    </select>
+
+<!-- 조회수 증가 -->
+    <update id="updateHitCount" parameterType="long">
+        UPDATE NOTICE SET HITCOUNT = HITCOUNT + 1 WHERE NUM = #{num}
+    </update>
+
+<!-- 게시물 상세 -->
+    <select id="findById" parameterType="long"
+            resultType="com.doit.app.model.Notice">
+        SELECT NUM, NOTICE, NAME, SUBJECT, CONTENT, HITCOUNT,
+               TO_CHAR(REGDATE,'YYYY-MM-DD') AS "regDate"
+        FROM NOTICE
+        WHERE NUM = #{num}
+    </select>
+
+<!-- 이전글 -->
+    <select id="findByPrev" parameterType="map" resultType="com.doit.app.model.Notice">
+        SELECT NUM, SUBJECT
+        FROM NOTICE
+        <where>
+            <if test="kwd != null and kwd != ''">
+                <include refid="where-list" />
+            </if>
+            AND ( NUM &gt; #{num} )
+        </where>
+        ORDER BY NUM ASC FETCH FIRST 1 ROWS ONLY
+    </select>
+
+<!-- 다음글 -->
+    <select id="findByNext" parameterType="map" resultType="com.doit.app.model.Notice">
+        SELECT NUM, SUBJECT
+        FROM NOTICE
+        <where>
+            <if test="kwd != null and kwd != ''">
+                <include refid="where-list" />
+            </if>
+            AND ( NUM &lt; #{num} )
+        </where>
+        ORDER BY NUM DESC FETCH FIRST 1 ROWS ONLY
+    </select>
+
+<!-- 첨부파일 리스트: 한 게시물의 모든 파일 -->
+    <select id="listNoticeFile" parameterType="long" resultType="com.doit.app.model.Notice">
+        SELECT FILENUM, NUM, SAVEFILENAME, ORIGINALFILENAME, FILESIZE
+        FROM NOTICEFILE
+        WHERE NUM = #{num}
+        ORDER BY FILENUM DESC
+    </select>
+
+<!-- 첨부파일 단건 조회 -->
+    <select id="findByFileId" parameterType="long" resultType="com.doit.app.model.Notice">
+        SELECT FILENUM, NUM, SAVEFILENAME, ORIGINALFILENAME, FILESIZE
+        FROM NOTICEFILE
+        WHERE FILENUM = #{fileNum}
+    </select>
+   
+<!-- 첨부파일 삭제: fileNum이 있으면 파일 1개, num만 있으면 게시물의 모든 파일 -->
+    <delete id="deleteNoticeFile" parameterType="map">
+        DELETE FROM NOTICEFILE
+        <where>
+            <if test="fileNum != null">
+                FILENUM = #{fileNum}
+            </if>
+            <if test="num != null">
+                AND NUM = #{num}
+            </if>
+        </where>
+    </delete>
+
+</mapper>

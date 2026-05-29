@@ -1,0 +1,10 @@
+/*============================
+ HomeController.java
+ - 테스트용 기본 컨트롤러 구성
+============================*/
+
+package com.doit.app.controller;
+
+public class HomeController {
+
+}

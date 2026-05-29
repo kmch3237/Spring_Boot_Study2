@@ -1,0 +1,5 @@
+package com.doit.app.mapper;
+
+public interface NoticeMapper {
+
+}

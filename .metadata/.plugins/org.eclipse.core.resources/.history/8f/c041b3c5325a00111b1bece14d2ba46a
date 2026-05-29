@@ -1,0 +1,15 @@
+/* =========================
+ 	NoticeService.java
+ 	- Service 계층 구성
+ 	- 인터페이스 구성
+=========================== */
+
+
+
+package com.doit.app.service;
+
+public interface NotisService {
+	
+	
+
+}

@@ -1,0 +1,8 @@
+package com.doit.app.model;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class NoticeImpl {
+
+}

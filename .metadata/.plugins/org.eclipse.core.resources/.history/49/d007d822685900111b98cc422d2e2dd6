@@ -1,0 +1,36 @@
+/* ========================
+ 	MemberController
+ 	- 컨트롤러 구성
+======================== */
+
+package com.doit.app.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.doit.app.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Controller
+@RequiredArgsConstructor
+@Slf4j
+@RequestMapping("/member/*")
+public class MemberController {
+
+	// controller에서는 서비스 써야함
+	private final MemberService service;
+	
+	// 클래스에 직접 세터 만들 수 있다 = 롬복으로 세터 구성 가능하다 = autowired로 가능하다
+	// 이 방법으로도 가능하다는걸 알아야함
+	
+	@GetMapping("list") 
+	public list()
+	{
+		
+	}
+
+}

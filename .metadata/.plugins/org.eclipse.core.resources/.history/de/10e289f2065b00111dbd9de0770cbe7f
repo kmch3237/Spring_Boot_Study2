@@ -1,0 +1,38 @@
+/*
+ 	NoticeServiceImpl.java
+ 	- 공지사항 notice 서비스 구현 클래스
+ 	- 역할 
+ 	  공지사항 게시물 등록,수정,삭제
+ 	  첨부파일 업로드, db저장, 삭제
+ 	  첨부파일 다운로드 응답 생성
+ 	  
+ 	-전체 흐름
+ 	 Controller → NoticeServiceImpl → NoticeMapper → MyBatis XML / DB  
+ 	 
+ 	-파일 관련 작업은 DB 뿐 아니라 서버의 실제 파일 시스템도 함께 처리
+ 	- 업로드 파일
+ 	   서버 /uploads/notice 폴더에 저장
+ 	   파일 경로는 DB 파일 테이블에 저장
+ */
+
+
+
+package com.doit.app.service;
+
+import org.springframework.stereotype.Service;
+
+import com.doit.app.mapper.NoticeMapper;
+
+import jakarta.servlet.ServletContext;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor 
+public class NoticeServiceImpl {
+	
+	
+	// 주요 속성 구성 
+	private final NoticeMapper mapper;
+	private ServletContext servletContext;
+
+}

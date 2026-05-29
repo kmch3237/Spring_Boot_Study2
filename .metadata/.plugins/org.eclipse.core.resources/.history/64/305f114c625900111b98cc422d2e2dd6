@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doit.app.mapper.MemberMapper">
+
+	<select id="listMember" resultType="com.doit.app.domain.Member">
+		SELECT NUM, NAME, TEL
+		FROM TESTMEMBER
+		ORDER BY NUM
+	</select>
+	
+	
+	<insert id="insertMember" parameterType="com.doit.app.domain.Member">
+		INSERT INTO TESTMEMBER(NUM, NAME, TEL)
+		VALUES(TESTMEMBER_SEQ.NEXTVAL, #{name}, #{tell})
+	</insert>
+	
+	
+	<select id="dataCount" resultType="Integer">
+		<!-- 		
+		SELECT NVL(COUNT(NUM), 0) AS COUNT
+		FROM TESTMEMBER num이 pk라 아래처럼 써주면 더 좋음-->
+		
+<!-- 	 	SELECT NVL(COUNT(*), 0) AS COUNT
+		FROM TESTMEMBER nvl안써도되는구조check!-->
+		
+		SELECT COUNT(*) AS COUNT
+		FROM TESTMEMBER		
+	 	
+	</select>
+	
+	
+
+</mapper>
