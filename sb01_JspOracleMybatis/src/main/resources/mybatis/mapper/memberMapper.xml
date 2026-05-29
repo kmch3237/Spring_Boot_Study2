@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 마이바티스 다운로드 리소스 중 pdf 파일 확인하여 구성!! 반드시 pdf에서 찾아서 쓰는 습관! -->    
+<!-- 이 XML이 MyBatis Mapper 형식을 따른다는 선언이며,
+	 MyBatis가 이 파일을 읽을 때 문법 구조를 검증하는 데 사용된다. -->    
+    
+<mapper namespace="com.doit.app.mapper.MemberMapper">
+<!-- Mapper XML의 시작 태그
+	- namespace는 이 XML 과 연결될 JAVA Mapper 인터페이스의 전체 경로이며,
+	  com.doit.app.domain.Member 인터페이스와 연결된다  -->
+
+	<!-- ※ 각 SQL을 정의하는 엘리먼트에서 ID 속성은 인터페이스의 메소드 이름과 매핑 -->
+	
+	<!--resultType="com.doit.app.domain.Member" 
+		→ 조회 결과 한 행을 Member 객체로 매핑하겠다는 의미 -->
+
+	<select id="listMember" resultType="com.doit.app.domain.Member">
+		SELECT NUM, NAME, TEL
+		FROM TESTMEMBER
+		ORDER BY NUM
+	</select>
+	
+	
+	<!-- parameterType="com.doit.app.domain.Member"
+		→ 이 SQL 구문에 전달되는 파라미터가 Member 객체라는 의미  -->
+	<insert id="insertMember" parameterType="com.doit.app.domain.Member">
+		INSERT INTO TESTMEMBER(NUM, NAME, TEL)
+		VALUES(TESTMEMBER_SEQ.NEXTVAL, #{name}, #{tel})
+	</insert>
+	
+	
+	<select id="dataCount" resultType="Integer">
+		<!-- 		
+		SELECT NVL(COUNT(NUM), 0) AS COUNT
+		FROM TESTMEMBER num이 pk라 아래처럼 써주면 더 좋음-->
+		
+<!-- 	 	SELECT NVL(COUNT(*), 0) AS COUNT
+		FROM TESTMEMBER nvl안써도되는구조check!-->
+		
+		SELECT COUNT(*) AS COUNT
+		FROM TESTMEMBER		
+	 	
+	</select>	
+	
+
+</mapper>
+
+<!-- MemberMapper 인터페이스와 연결되어 DB의 TESTMEMBER 테이블 조회, 삽입, 개수 조회  -->

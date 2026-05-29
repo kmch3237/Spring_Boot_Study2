@@ -1,0 +1,77 @@
+SELECT USER
+FROM DUAL;
+-- SCOTT
+
+SELECT *
+FROM TAB;
+
+
+--○ 테이블 생성
+-- 테이블명 : TESTMEMBER
+CREATE TABLE TESTMEMBER
+(  NUM NUMBER            NOT NULL
+ , NAME VARCHAR2(50)     NOT NULL
+ , TEL VARCHAR2(50)
+ , CONSTRAINT PK_TESTMEMBER_NUM PRIMARY KEY(NUM)
+);
+-- Table TESTMEMBER이(가) 생성되었습니다.
+
+
+--○ 실습 시퀀스 생성
+-- 시퀀스명 : TESTMEMBER_SEQ
+CREATE SEQUENCE TESTMEMBER_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+-- Sequence TESTMEMBER_SEQ이(가) 생성되었습니다.
+
+--○ 데이터 등록 쿼리문 구성
+INSERT INTO TESTMEMBER(NUM, NAME, TEL)
+VALUES(TESTMEMBER_SEQ.NEXTVAL, '강명철', '010-1212-3434')
+;
+-- 1 행 이(가) 삽입되었습니다.
+
+SELECT *
+FROM TESTMEMBER;
+
+COMMIT;
+-- 커밋 완료
+
+
+--○ 데이터 조회 쿼리문 구성
+SELECT NUM, NAME, TEL
+FROM TESTMEMBER
+ORDER BY NUM
+;
+-- 1	강명철	010-1212-3434
+
+
+-- ○ 게시물 갯수 조회(전체)
+SELECT NVL(COUNT(NUM), 0) AS COUNT
+FROM TESTMEMBER
+;
+-- 1
+
+
+--○ 게시물 수정 쿼리문 구성
+
+UPDATE TESTMEMBER
+SET NAME = '강명숙', TEL = '010-1234-5678'
+WHERE NUM = 1
+;
+-- 1 행 이(가) 업데이트되었습니다.
+
+ROLLBACK;
+
+--○ 게시물 삭제 쿼리문 구성
+DELETE
+FROM TESTMEMBER
+WHERE NUM = 1
+;
+-- 1 행 이(가) 삭제되었습니다.
+
+ROLLBACK;
+
+

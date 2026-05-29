@@ -1,0 +1,29 @@
+■■■ 스프링 부트 기본 실습 ■■■
+
+
+- src/main/resources/sql/sb01_scott.sql
+→ db관련 준비 
+
+
+- src/main/java/com/doit/app/domain/Member.java
+→ dto 생성 
+
+- src/main/java/com/doit/app/service/MemberService.java
+→ Service 구성. → 인터페이스 구성. 
+
+
+- src/main/java/com/doit/app/mapper/MemberMapper.java
+→ 매퍼 인터페이스 구성.
+
+src/main/resources/mybatis/mapper/memberMapper.xml
+→ 주요 쿼리문 구성
+
+- src/main/java/com/doit/app/service/MemberServiceImpl.java
+→ Service 계층의 구현 클래스 구성
+
+- /sb01_JspOracleMybatis/src/main/java/com/doit/app/controller/MemberController.java
+→ 컨트롤러 구성 
+
+- src/main/webapp/WEB-INF/views/list.jsp
+→ 회원 리스트 뷰 페이지 구성
+→ 전체 회원 수 및 리스트 출력
