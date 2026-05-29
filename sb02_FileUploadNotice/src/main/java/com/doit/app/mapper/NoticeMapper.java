@@ -35,6 +35,8 @@ public interface NoticeMapper {
 	public Notice findByFileId(long fileNum);
 	public void deleteNoticeFile(Map<String, Object> map) throws SQLException;
 	
+	public void insertNoticeFile(Notice dto) throws SQLException;
+	
 
 	
 }

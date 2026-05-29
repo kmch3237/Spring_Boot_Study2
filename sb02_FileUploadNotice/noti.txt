@@ -56,4 +56,8 @@ finish
 	
 - src/main/resources/mybatis/mapper/NoticeMapper.xml	
 	→ MyBatis Mapper XML 구성 
+
+- src/main/java/com/doit/app/service/NoticeServiceImpl.java	
+  → notice서비스 구현 클래스
+	
 	

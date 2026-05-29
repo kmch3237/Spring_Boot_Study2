@@ -9,6 +9,15 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+
+@Setter
+@Getter
+@RequiredArgsConstructor
 public class Notice {
 	
 	// 테이블명 : NOTICE
